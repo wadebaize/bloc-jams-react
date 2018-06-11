@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class Library extends Component {
   constructor(props) {
     super(props);
-    this.state = { albums: albumData };
+    this.state = {  albums: albumData  };
   }
 
   render() {
