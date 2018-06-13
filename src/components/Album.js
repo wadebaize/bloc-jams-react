@@ -9,9 +9,35 @@ class Album extends Component {
        });
 
        this.state = {
-         album: album
+         album: album,
+         currentSong: album.songs[0],
+         isPlaying: false
        };
-  }
+       this.audioElement = document.createElement('audio');
+       this.audioElement.src = album.songs[0].audioSrc;
+     }
+     play() {
+       this.audioElement.play();
+       this.setState({ isPlaying: true });
+     }
+     pause() {
+       this.audioElement.pause();
+       this.setState({ isPlaying: false });
+     }
+     setSong(song) {
+       this.audioElement.src =song.audioSrc;
+       this.setState({ currentSong: song });
+     }
+     handleSongClick(song) {
+       const isSameSong = this.state.currentSong === song;
+       if (this.state.isPlaying && isSameSong) {
+         this.pause();
+       } else {
+         if (!isSameSong) { this.setSong(song); }  
+         this.play();
+       }
+     }
+
   render() {
     return (
       <section className="album">
@@ -33,11 +59,7 @@ class Album extends Component {
               {
                 this.state.album.songs.map( (song, index) =>
                 <div>
-                  <tr key={index.song}>{index+1}</tr>
-                  <tr key={index}></tr>
-                    <td>{song.index}</td>
-                    <td>{song.title}</td>
-                    <td>{song.duration}</td>
+                  <tr className="song" key={index.song} onClick={() => this.handleSongClick(song)}>{index+1}{song.title}{song.duration}</tr>
 
 
                 </div>
@@ -47,7 +69,7 @@ class Album extends Component {
           </table>
          </section>
     );
-  }
+}
 }
 
 export default Album;
