@@ -33,10 +33,31 @@ class Album extends Component {
        if (this.state.isPlaying && isSameSong) {
          this.pause();
        } else {
-         if (!isSameSong) { this.setSong(song); }  
+         if (!isSameSong) { this.setSong(song); }
          this.play();
        }
      }
+
+     buttonController(song, index){
+       const pauseButton = <span className="ion-pause"></span>
+       const playButton = <span className="ion-play"></span>
+       const isSameSong = this.state.currentSong === song;
+
+       if (this.state.isPlaying === false && this.state.hovered === song){
+         return playButton;
+       } else if (this.state.isPlaying === true && this.state.hovered === song && isSameSong){
+         return pauseButton;
+       } else {
+         return (index + 1);
+       }
+     }
+
+      mouseHoverOn(song) {
+       this.setState({hovered: song});
+      }
+      mouseHoverOff(song) {
+        this.setState({ hovered: null});
+      }
 
   render() {
     return (
@@ -59,9 +80,11 @@ class Album extends Component {
               {
                 this.state.album.songs.map( (song, index) =>
                 <div>
-                  <tr className="song" key={index.song} onClick={() => this.handleSongClick(song)}>{index+1}{song.title}{song.duration}</tr>
-
-
+                  <tr className="song" key={index.song} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.mouseHoverOn(song)} onMouseLeave={() => this.mouseHoverOff(song)}>
+                                    <td> {this.buttonController(song, index)} </td>
+                                    <td>{song.title}</td>
+                                    <td>{song.duration}</td>
+                  </tr>
                 </div>
                 )
               }
