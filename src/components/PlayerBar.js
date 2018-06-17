@@ -4,9 +4,6 @@ class PlayerBar extends Component {
   render() {
     return (
       <section className="player-bar">
-<<<<<<< HEAD
-        player bar goes here
-=======
         <section id="buttons">
            <button id="previous" onClick={this.props.handlePrevClick}>
              <span className="ion-skip-backward"></span>
@@ -14,7 +11,7 @@ class PlayerBar extends Component {
            <button id="play-pause" onClick={this.props.handleSongClick}>
              <span className={this.props.isPlaying ? "ion-pause" : "ion-play"}></span>
            </button>
-           <button id="next">
+           <button id="next" onClick={this.props.handleNextClick}>
              <span className="ion-skip-forward"></span>
            </button>
          </section>
@@ -28,7 +25,6 @@ class PlayerBar extends Component {
            <input type="range" className="seek-bar" value="80" />
            <div className="icon ion-volume-high"></div>
          </section>
->>>>>>> checkpoint-8-buttons
       </section>
     );
   }
