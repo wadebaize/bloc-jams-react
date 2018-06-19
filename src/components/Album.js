@@ -116,7 +116,7 @@ class Album extends Component {
         this.audioElement.songVolume = newVolume;
         this.setState({ songVolume: newVolume });
       }
-      
+
       formatTime(songTime){
       const minutes = Math.floor(songTime / 60);
       const seconds = Math.floor(songTime - minutes * 60);
