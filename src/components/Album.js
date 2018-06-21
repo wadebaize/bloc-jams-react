@@ -120,7 +120,11 @@ class Album extends Component {
       formatTime(songTime){
       const minutes = Math.floor(songTime / 60);
       const seconds = Math.floor(songTime - minutes * 60);
-       return minutes + ":" + seconds;
+      if (seconds < 10){
+        return minutes + ":" + "0" + seconds;
+      } else {
+        return minutes + ":" + seconds;
+      }
       }
 
   render() {
